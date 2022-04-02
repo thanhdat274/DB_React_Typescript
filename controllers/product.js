@@ -5,15 +5,7 @@ export const ListProduct = async(req, res) => {
         const product = await Product.find({}).exec()
         res.json(product)
     } catch (error) {
-        res.status(400).json({ message: 'Không thể thực hiện' })
-    }
-}
-export const AddProduct = async(req, res) => {
-    try {
-        const product = await Product(req.body).save()
-        res.json(product)
-    } catch (error) {
-        res.status(400).json({ message: 'Không thể thêm mới sản phẩm' })
+        res.status(400).json({ message: 'Không thể hiển thị tất cả danh sách' })
     }
 }
 export const ListProductDetail = async(req, res) => {
@@ -21,7 +13,15 @@ export const ListProductDetail = async(req, res) => {
         const product = await Product.findOne({ _id: req.params.id }).exec()
         res.json(product)
     } catch (error) {
-        res.status(400).json({ message: 'Không thể thực hiện' })
+        res.status(400).json({ message: 'Không thể hiện thị danh sách 1 sản phẩm' })
+    }
+}
+export const AddProduct = async(req, res) => {
+    try {
+        const product = await Product(req.body).save()
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({ message: 'Thêm mới không thành công' })
     }
 }
 export const DeleteProduct = async(req, res) => {
@@ -29,7 +29,7 @@ export const DeleteProduct = async(req, res) => {
         const product = await Product.findOneAndDelete({ _id: req.params.id }).exec()
         res.json(product)
     } catch (error) {
-        res.status(400).json({ message: 'Không thể thực hiện chức anwng xóa' })
+        res.status(400).json({ message: 'Xóa sản phẩm không thành công' })
     }
 }
 export const UpdateProduct = async(req, res) => {
@@ -37,6 +37,6 @@ export const UpdateProduct = async(req, res) => {
         const product = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }).exec()
         res.json(product)
     } catch (error) {
-        res.status(400).json({ message: 'Không thể thực hiện chức anwng update' })
+        res.status(400).json({ message: 'Update không thành công' })
     }
 }
