@@ -9,11 +9,15 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    quantity:{
+    quantity: {
         type: Number,
         required: true
     },
-    desc:{
+    img: {
+        type: String,
+        default: ""
+    },
+    desc: {
         type: String,
         required: true
     },
@@ -21,5 +25,5 @@ const ProductSchema = new mongoose.Schema({
         type: ObjectId,
         ref: 'Category'
     }
-}, {timestamps: true});
+}, { timestamps: true });
 export default mongoose.model('Product', ProductSchema)

@@ -9,19 +9,16 @@ export const ListCategory = async(req, res) => {
         res.status(400).json({ message: 'Không thể thực hiện' })
     }
 }
-export const ListCategoryDetail = async(request, response) => {
-    try {
-        const cate = await Category.findOne({ _id: request.params.id }).exec()
-        response.json( cate)
-    } catch (error) {
-        response.status(400).json({ message: "Không thể hiển thị" })
-    }
-};
 export const ListCategoryAndProduct = async(request, response) => {
     try {
-        const categoryId = await Category.findOne({ _id: request.params.id }).exec()
-        const product = await Product.find({ categoryId }).exec()
-        response.json({ categoryId, product })
+        if (request.query._embed) {
+            const categoryId = await Category.findOne({ _id: request.params.id }).exec()
+            const product = await Product.find({ categoryId }).populate('categoryId').exec()
+            response.json({ categoryId, product })
+        } else {
+            const cate = await Category.findOne({ _id: request.params.id }).exec()
+            response.json(cate)
+        }
     } catch (error) {
         response.status(400).json({ message: "Không thể hiển thị" })
     }

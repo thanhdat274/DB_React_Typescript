@@ -1,9 +1,9 @@
 import User from "../model/user";
 
-export const UserById= async (req, res, next,id) =>{
+export const UserById = async(req, res, next, id) => {
     const user = await User.findById(id).exec();
-    if(!user){
-        return res.status(400).json({message: "Không tìm thấy user"})
+    if (!user) {
+        return res.status(400).json({ message: "Không tìm thấy user" })
     }
     req.profile = user;
     req.profile.password = undefined;
@@ -11,15 +11,15 @@ export const UserById= async (req, res, next,id) =>{
     next();
 }
 
-export const ListUser = async(req, res) =>{
-   try {
+export const ListUser = async(req, res) => {
+    try {
         const user = await User.find({}).exec();
         res.json(user);
-   } catch (error) {
-       res.status(400).json({
-           message: "Không load được danh sách"
-       })
-   }
+    } catch (error) {
+        res.status(400).json({
+            message: "Không load được danh sách"
+        })
+    }
 }
 export const ListOneUser = async(req, res) => {
     try {
