@@ -15,7 +15,7 @@ app.use("/api", productRouter);
 app.use("/api", cateRouter);
 app.use("/api", AuthRouter);
 
-mongoose.connect('mongodb://127.0.0.1:27017/ASM_NodeJS')
+mongoose.connect('mongodb://127.0.0.1:27017/DB_React_Typescript')
     .then(() => console.log("Kết nối với Database thành công"))
     .catch(err => console.log("Kết nối với Database không thành công"))
 
